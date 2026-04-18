@@ -1,0 +1,53 @@
+@model IEnumerable<AnimeEventsWeb.Models.Event>
+
+@{
+    ViewData["Title"] = "Panel de Administrador";
+}
+
+<div class="row">
+    <div class="col s12">
+        <h4>Panel de Administrador - Gestión de Eventos</h4>
+        <a asp-action="Create" class="btn waves-effect waves-light blue"><i class="material-icons left">add</i>Crear Nuevo Evento</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <table class="striped highlight responsive-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Ubicación</th>
+                    <th>Categoría</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                    // Colorear el texto de estado visualmente basado en el Enum de C#
+                    var stateColor = item.State switch {
+                        AnimeEventsWeb.Models.EventState.Activo => "green-text text-darken-2",
+                        AnimeEventsWeb.Models.EventState.Inactivo => "grey-text",
+                        AnimeEventsWeb.Models.EventState.Cancelado => "red-text text-accent-4",
+                        AnimeEventsWeb.Models.EventState.Finalizado => "blue-text",
+                        _ => "black-text"
+                    };
+
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Date.ToShortDateString()</td>
+                        <td>@item.Location</td>
+                        <td>@item.Category</td>
+                        <td class="@stateColor" style="font-weight:bold;">@item.State</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn-small waves-effect waves-light amber darken-2"><i class="material-icons">edit</i></a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

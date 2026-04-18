@@ -1,0 +1,82 @@
+@using AnimeEventsWeb.Models
+@model AnimeEventsWeb.Models.Event
+
+@{
+    ViewData["Title"] = "Crear Evento";
+}
+
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Registrar Nuevo Evento</span>
+                <form asp-action="Create">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">title</i>
+                            <input asp-for="Name" type="text" id="Name" required>
+                            <label for="Name">Nombre del Evento</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">event</i>
+                            <input asp-for="Date" type="date" id="Date" required>
+                            <label for="Date">Fecha</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">category</i>
+                            <input asp-for="Category" type="text" id="Category" required>
+                            <label for="Category">Categoría</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">location_on</i>
+                            <input asp-for="Location" type="text" id="Location" required>
+                            <label for="Location">Ubicación</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">image</i>
+                            <input asp-for="ImageUrl" type="url" id="ImageUrl" required>
+                            <label for="ImageUrl">URL de la Imagen / Poster</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">description</i>
+                            <textarea asp-for="Description" id="Description" class="materialize-textarea" required></textarea>
+                            <label for="Description">Descripción</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">info</i>
+                            <select asp-for="State" asp-items="Html.GetEnumSelectList<EventState>()">
+                            </select>
+                            <label>Estado del Evento</label>
+                        </div>
+                    </div>
+                    
+                    <div class="card-action right-align">
+                        <a asp-action="Index" class="btn-flat waves-effect" style="margin-right: 15px;">Cancelar</a>
+                        <button type="submit" class="btn waves-effect waves-light blue">
+                            Guardar <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            M.FormSelect.init(elems);
+        });
+    </script>
+}
