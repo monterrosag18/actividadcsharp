@@ -20,7 +20,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         // Solo mostraremos los eventos que no estén "Borrados" lógicamente (o simplemente mostrar todos y pintarles el estado)
-        var events = await _context.Events.ToListAsync();
+        var events = await _context.AnimeEvents.ToListAsync();
         return View(events);
     }
 

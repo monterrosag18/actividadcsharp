@@ -21,7 +21,7 @@ namespace AnimeEventsWeb.Controllers
         // GET: EventAdmin (Listado administrativo)
         public async Task<IActionResult> Index()
         {
-            var events = await _context.Events.ToListAsync();
+            var events = await _context.AnimeEvents.ToListAsync();
             return View(events);
         }
 
@@ -46,7 +46,7 @@ namespace AnimeEventsWeb.Controllers
         {
             if (id == null) return NotFound();
 
-            var ev = await _context.Events.FindAsync(id);
+            var ev = await _context.AnimeEvents.FindAsync(id);
             if (ev == null) return NotFound();
 
             return View(ev);
@@ -76,7 +76,7 @@ namespace AnimeEventsWeb.Controllers
         {
             if (id == null) return NotFound();
 
-            var ev = await _context.Events.FirstOrDefaultAsync(m => m.Id == id);
+            var ev = await _context.AnimeEvents.FirstOrDefaultAsync(m => m.Id == id);
             if (ev == null) return NotFound();
 
             return View(ev);
@@ -86,10 +86,10 @@ namespace AnimeEventsWeb.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ev = await _context.Events.FindAsync(id);
+            var ev = await _context.AnimeEvents.FindAsync(id);
             if (ev != null)
             {
-                _context.Events.Remove(ev);
+                _context.AnimeEvents.Remove(ev);
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction(nameof(Index));
@@ -97,7 +97,7 @@ namespace AnimeEventsWeb.Controllers
 
         private bool EventExists(int id)
         {
-            return _context.Events.Any(e => e.Id == id);
+            return _context.AnimeEvents.Any(e => e.Id == id);
         }
     }
 }
